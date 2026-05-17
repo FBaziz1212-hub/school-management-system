@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>View Admissions</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    padding:30px;
+}
+
+.container{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#1a3c6e;
+    margin-bottom:20px;
+}
+
+.search-box{
+    margin-bottom:20px;
+}
+
+.search-box input{
+    width:300px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:15px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th{
+    background:#1a5dc7;
+    color:white;
+    padding:12px;
+}
+
+table td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+tr:hover{
+    background:#f2f2f2;
+}
+
+.btn{
+    background:#1a5dc7;
+    color:white;
+    padding:6px 12px;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.btn:hover{
+    background:#154aa3;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>All Admissions List</h1>
+
+<div class="search-box">
+<input
+type="text"
+id="searchInput"
+placeholder="Search Student..."
+onkeyup="searchTable()">
+</div>
+
+<table>
+
+<thead>
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Father</th>
+    <th>Class</th>
+    <th>Gender</th>
+    <th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for s in students %}
+
+<tr>
+    <td>{{ s.id }}</td>
+    <td>{{ s.name }}</td>
+    <td>{{ s.father }}</td>
+    <td>{{ s.student_class }}</td>
+    <td>{{ s.gender }}</td>
+
+    <td>
+        <a href="/print/{{ s.id }}" class="btn">
+        Print
+        </a>
+    </td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+function searchTable() {
+
+let input = document
+.getElementById("searchInput")
+.value
+.toLowerCase();
+
+let rows = document.querySelectorAll("tbody tr");
+
+rows.forEach(row => {
+
+let text = row.innerText.toLowerCase();
+
+if(text.includes(input)) {
+    row.style.display = "";
+}
+else {
+    row.style.display = "none";
+}
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

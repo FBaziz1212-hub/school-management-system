@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("/static/school.jpg");
+
+    background-size:cover;
+    background-position:center;
+}
+
+/* Glass Dashboard */
+
+.container{
+    width:450px;
+
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,0.2);
+
+    border-radius:25px;
+
+    padding:45px 35px;
+
+    text-align:center;
+
+    box-shadow:0 10px 40px rgba(0,0,0,0.35);
+}
+
+/* Logo */
+
+.logo{
+    width:90px;
+    margin-bottom:15px;
+}
+
+/* Heading */
+
+h1{
+    color:white;
+    font-size:32px;
+    margin-bottom:10px;
+    font-weight:700;
+}
+
+p{
+    color:#e8e8e8;
+    margin-bottom:35px;
+    font-size:15px;
+}
+
+/* Buttons */
+
+.btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:10px;
+
+    width:100%;
+
+    padding:15px;
+
+    margin:14px 0;
+
+    text-decoration:none;
+
+    color:white;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    transition:0.3s ease;
+
+    background:linear-gradient(135deg,#1a5dc7,#4285f4);
+
+    box-shadow:0 5px 15px rgba(66,133,244,0.3);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(66,133,244,0.4);
+}
+
+/* Logout */
+
+.logout{
+    background:linear-gradient(135deg,#e74c3c,#ff6b6b);
+    box-shadow:0 5px 15px rgba(231,76,60,0.3);
+}
+
+.logout:hover{
+    box-shadow:0 10px 25px rgba(231,76,60,0.4);
+}
+
+/* Footer */
+
+.footer{
+    margin-top:25px;
+    color:#ddd;
+    font-size:13px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img
+src="{{ url_for('static', filename='logo.png') }}"
+class="logo">
+
+<h1>Welcome Admin 👩‍💻</h1>
+
+<p>
+Smart School Management System
+</p>
+
+<a href="/admission" class="btn">
+➕ New Admission
+</a>
+
+<a href="/certificate" class="btn">
+📄 Leaving Certificate
+</a>
+
+<a href="/view_admissions" class="btn">
+📋 View Admissions
+</a>
+
+<a href="/logout" class="btn logout">
+🚪 Logout
+</a>
+
+<div class="footer">
+Hira Bait-ul-Hamd High School Sukkur
+</div>
+
+</div>
+
+</body>
+</html>

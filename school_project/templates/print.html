@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Print Admission Form</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    background:#f2f4f7;
+    padding:0;
+}
+
+.container{
+    width:210mm;
+    min-height:297mm;
+    margin:auto;
+    background:white;
+    padding:15px;
+    overflow: hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    position:relative;
+}
+
+/* HEADER */
+
+.header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border-bottom:2px solid #eee;
+    padding-bottom:15px;
+    margin-bottom:20px;
+}
+
+.logo{
+    width:90px;
+}
+
+.header h1{
+    font-family:'Times New Roman', serif;
+    font-size:24px;
+    color:#1a3c6e;
+}
+
+.badge{
+    background:#28a745;
+    color:white;
+    padding:8px 20px;
+    border-radius:8px;
+    font-weight:bold;
+    display:inline-block;
+    margin-top:5px;
+}
+
+.session{
+    margin-top:8px;
+    color:#4285f5;
+    font-size:14px;
+}
+
+/* SECTION */
+
+h3{
+    margin:10px 0;
+    color:#1a3c6e;
+    border-left:5px solid #1a5dc7;
+    padding-left:10px;
+}
+
+.form-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.form-group{
+    flex:1;
+}
+
+label{
+    font-weight:bold;
+    font-size:13px;
+}
+
+.print-box{
+    width:100%;
+    padding:6px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    background:#fafafa;
+    min-height:30px;
+}
+
+/* PHOTO */
+
+.photo-box{
+    width:120px;
+    height:150px;
+    border:2px dashed #aaa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    margin-top:10px;
+    position:absolute;
+    right:30px;
+    top:50px;
+}
+
+/* BUTTONS */
+
+.btns{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+button,a{
+    flex:1;
+    text-align:center;
+    padding:10px;
+    border:none;
+    text-decoration:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.print-btn{
+    background:#1a5dc7;
+}
+
+.dashboard-btn{
+    background:#28a745;
+}
+
+.print-btn:hover{
+    background:#154aa3;
+}
+
+.dashboard-btn:hover{
+    background:#218838;
+}
+
+/* PRINT */
+
+@media print{
+
+    .btns{
+        display:none;
+    }
+
+    body{
+        margin: 0;
+        padding: 0;
+        background:white;
+    }
+     .container{
+        width:210mm;
+        height:297mm;
+        padding:8mm;
+        overflow:hidden;
+        box-shadow:none;
+    }
+    .btns{
+        display:none;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+
+    <div>
+
+        <h1>HIRA BAIT-UL-HAMD HIGH SCHOOL SUKKUR</h1>
+
+        <div class="badge">
+            ADMISSION FORM
+        </div>
+
+        <div class="session">
+            Session: {{ s.session_start }} - {{ s.session_end }}
+        </div>
+
+    </div>
+
+</div>
+<!-- PHOTO -->
+
+<div class="photo-box">
+
+{% if s.photo %}
+    <img src="{{ url_for('static', filename='uploads/' + s.photo) }}"
+    style="width:100%;height:100%;object-fit:cover;">
+{% else %}
+    No Photo
+{% endif %}
+
+</div>
+
+<!-- STUDENT INFO -->
+
+<h3>Student Information</h3>
+
+<div class="form-row">
+
+    <div class="form-group">
+        <label>Name</label>
+        <div class="print-box">{{ s.name }}</div>
+    </div>
+
+    <div class="form-group">
+        <label>Surname</label>
+        <div class="print-box">{{ s.surname }}</div>
+    </div>
+
+</div>
+
+<div class="form-row">
+
+    <div class="form-group">
+        <label>Date Of Birth</label>
+        <div class="print-box">{{ s.dob }}</div>
+    </div>
+
+    <div class="form-group">
+        <label>Gender</label>
+        <div class="print-box">{{ s.gender }}</div>
+    </div>
+
+</div>
+
+<div class="form-row">
+
+    <div class="form-group">
+        <label>Nationality</label>
+        <div class="print-box">{{ s.nationality }}</div>
+    </div>
+
+    <div class="form-group">
+        <label>Religion</label>
+        <div class="print-box">{{ s.religion }}</div>
+    </div>
+
+</div>
+
+<div class="form-group">
+    <label>Place Of Birth</label>
+    <div class="print-box">{{ s.place_of_birth }}</div>
+</div>
+
+<div class="form-group">
+    <label>Address</label>
+    <div class="print-box">{{ s.address }}</div>
+</div>
+
+
+
+<!-- PARENT INFO -->
+
+<h3>Parent Information</h3>
+
+<div class="form-row">
+
+    <div class="form-group">
+        <label>Father Name</label>
+        <div class="print-box">{{ s.father }}</div>
+    </div>
+
+    <div class="form-group">
+        <label>Mother Name</label>
+        <div class="print-box">{{ s.mother }}</div>
+    </div>
+
+</div>
+
+<div class="form-row">
+
+    <div class="form-group">
+        <label>Father CNIC</label>
+        <div class="print-box">{{ s.father_cnic }}</div>
+    </div>
+
+    <div class="form-group">
+        <label>Mother CNIC</label>
+        <div class="print-box">{{ s.mother_cnic }}</div>
+    </div>
+
+</div>
+
+<div class="form-row">
+
+    <div class="form-group">
+        <label>Father Profession</label>
+        <div class="print-box">{{ s.father_profession }}</div>
+    </div>
+
+    <div class="form-group">
+        <label>Mother Profession</label>
+        <div class="print-box">{{ s.mother_profession }}</div>
+    </div>
+
+</div>
+
+<div class="form-row">
+
+    <div class="form-group">
+        <label>Father Mobile</label>
+        <div class="print-box">{{ s.mobile }}</div>
+    </div>
+
+    <div class="form-group">
+        <label>Mother Mobile</label>
+        <div class="print-box">{{ s.mother_mobile }}</div>
+    </div>
+
+</div>
+
+<!-- ADMISSION DETAILS -->
+
+<h3>Admission Details</h3>
+
+<div class="form-group">
+    <label>Last School</label>
+    <div class="print-box">{{ s.last_school }}</div>
+</div>
+
+<div class="form-row">
+
+    <div class="form-group">
+        <label>Admission Date</label>
+        <div class="print-box">{{ s.admission_date }}</div>
+    </div>
+
+    <div class="form-group">
+        <label>Class</label>
+        <div class="print-box">{{ s.student_class }}</div>
+    </div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<div class="btns">
+
+    <button onclick="window.print()" class="print-btn">
+        Print
+    </button>
+
+    <a href="/dashboard" class="dashboard-btn">
+        Back to Dashboard
+    </a>
+
+</div>
+
+</div>
+
+</body>
+</html>
